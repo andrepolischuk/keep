@@ -34,11 +34,13 @@
   "homepage": "https://github.com/andrepolischuk/keep",
   "dependencies": {
     "electron-config": "^1.0.0",
-    "electron-debug": "^1.0.1"
+    "electron-debug": "^1.0.1",
+    "electron-spellchecker": "^1.1.2"
   },
   "devDependencies": {
     "electron": "^1.4.4",
     "electron-packager": "^9.1.0",
+    "electron-rebuild": "^1.8.2",
     "standard": "^10.0.3"
   }
 }
