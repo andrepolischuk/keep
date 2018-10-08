@@ -54,6 +54,27 @@ function handleNavigate (event, hash) {
   window.location.hash = hash
 }
 
+const electronSpellchecker = window.require('electron-spellchecker');
+
+function loadSpellChecker() {
+       if (window.require) {
+         const SpellCheckHandler = electronSpellchecker.SpellCheckHandler;
+         const ContextMenuListener = electronSpellchecker.ContextMenuListener;
+         const ContextMenuBuilder = electronSpellchecker.ContextMenuBuilder;
+
+         window.spellCheckHandler = new SpellCheckHandler();
+         window.spellCheckHandler.attachToInput();
+         window.spellCheckHandler.switchLanguage('en-US');
+
+         let contextMenuBuilder = new ContextMenuBuilder(window.spellCheckHandler);
+
+         let contextMenuListener = new ContextMenuListener((info) => {
+             contextMenuBuilder.showPopupMenu(info);
+         });
+       }
+}
+
 window.addEventListener('DOMContentLoaded', handleDOMLoaded, false)
 window.addEventListener('click', handleClick, false)
+window.addEventListener('load', function () { loadSpellChecker() } );
 ipc.on('navigate', handleNavigate)
