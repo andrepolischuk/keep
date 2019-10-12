@@ -77,6 +77,16 @@ module.exports = function createMainMenu () {
           label: 'Select All',
           accelerator: 'CmdOrCtrl+A',
           role: 'selectall'
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'Find',
+          accelerator: 'CmdOrCtrl+F',
+          click: (item, win) => {
+            if (win) win.webContents.webContents.executeJavaScript("document.dispatchEvent (new KeyboardEvent('keydown', {'keyCode':191}));");
+          }
         }
       ]
     },
@@ -92,7 +102,7 @@ module.exports = function createMainMenu () {
         },
         {
           label: 'Toggle Full Screen',
-          accelerator: 'Ctrl+Cmd+F',
+          accelerator: 'f11',
           click: (item, win) => {
             if (win) win.setFullScreen(!win.isFullScreen())
           }
@@ -125,7 +135,7 @@ module.exports = function createMainMenu () {
         },
         {
           label: 'Notes',
-          accelerator: 'CmdOrCtrl+1',
+          accelerator: 'f1',
           click: (item, win) => {
             win.webContents.send('navigate', 'home')
           },
