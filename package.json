@@ -36,13 +36,13 @@
   },
   "homepage": "https://github.com/andrepolischuk/keep",
   "dependencies": {
-    "electron-config": "^1.0.0",
-    "electron-debug": "^1.0.1"
+    "electron-config": "^2.0.0",
+    "electron-debug": "^3.0.1"
   },
   "devDependencies": {
-    "electron": "^3.0.7",
-    "electron-builder": "^20.29.0",
-    "standard": "^10.0.3"
+    "electron": "^6.0.12",
+    "electron-builder": "^21.2.0",
+    "standard": "^14.3.1"
   },
   "build": {
     "appId": "com.andrepolischuk.keep",
