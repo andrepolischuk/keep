@@ -44,6 +44,13 @@ function handleDOMLoaded () {
 function handleClick (event) {
   const node = event.target
 
+  if (node.closest('a').href.indexOf('?authuser=') > -1) {
+    // Link is to other account window.
+    console.log("Opening new account window.")
+    event.preventDefault()
+    ipc.send('newaccountwindow', node.closest('a').href)
+  }
+
   if (node.nodeName === 'A' && node.target === '_blank') {
     event.preventDefault()
     ipc.send('clicklink', node.href)

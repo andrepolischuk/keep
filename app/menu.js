@@ -19,16 +19,25 @@ module.exports = function createMainMenu () {
         {
           label: 'Hide Keep',
           accelerator: 'Cmd+H',
-          role: 'hide'
+          role: 'hide',
+          click: () => {
+            app.emit('hide-all')
+          }
         },
         {
           label: 'Hide Others',
           accelerator: 'Alt+Cmd+H',
-          role: 'hideothers'
+          role: 'hideothers',
+          click: (item, win) => {
+            app.emit('hide-others', win)
+          }
         },
         {
           label: 'Show All',
-          role: 'unhide'
+          role: 'unhide',
+          click: () => {
+            app.emit('show-all')
+          }
         },
         {
           type: 'separator'
