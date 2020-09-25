@@ -1,11 +1,12 @@
 'use strict'
 const { app, Menu, Tray } = require('electron')
+const path = require('path')
 
 module.exports = function createTrayMenu (hideAllWindowsCallback, showAllWindowsCallback) {
   let tray = null
   app.whenReady().then(() => {
     console.log("Creating tray icon.")
-    tray = new Tray('./build/icon.png')
+    tray = new Tray(path.join(__dirname, '..', 'build','icon.png'))
     const contextMenu = Menu.buildFromTemplate([
       {
         label: 'Help',
