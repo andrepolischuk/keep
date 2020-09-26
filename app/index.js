@@ -19,6 +19,14 @@ function handleResize (args) {
   }
 }
 
+function handleClose (event) {
+  if(windows.length < 2) {
+    // If this is the last window, hide instead of closing.
+    event.preventDefault();
+    event.sender.hide();
+  }
+}
+
 function handleClosed (args) {
   windows = windows.filter(function (value, index, array) {
     try {
@@ -51,18 +59,13 @@ function showAllWindows () {
   })
 }
 
-app.on('window-all-closed', () => {
-  if (process.platform === 'darwin') {
-    app.hide()
-  } else {
-    app.quit()
-  }
-})
+app.on('window-all-closed', e => e.preventDefault())
 
 app.on('activate', () => {
-  if (!windows.length < 1) {
-    windows.push(createMainWindow(handleResize, handleClosed))
+  if (windows.length < 1) {
+    windows.push(createMainWindow(handleResize, handleClose, handleClosed))
   }
+  showAllWindows()
 })
 
 ipc.on('clicklink', (event, url) => {
@@ -71,7 +74,7 @@ ipc.on('clicklink', (event, url) => {
 })
 
 app.on('ready', () => {
-  windows.push(createMainWindow(handleResize, handleClosed))
+  windows.push(createMainWindow(handleResize, handleClose, handleClosed))
   createMainMenu()
   createTrayMenu(hideAllWindows, showAllWindows)
 })
@@ -93,6 +96,6 @@ ipc.on('newaccountwindow', (event, url) => {
       return true;
     }
   }).length < 1) {
-    windows.push(createMainWindowWithUrl(handleResize, handleClosed, url))
+    windows.push(createMainWindowWithUrl(handleResize, handleClose, handleClosed, url))
   }
 })

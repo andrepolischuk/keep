@@ -48,5 +48,8 @@ module.exports = function createTrayMenu (hideAllWindowsCallback, showAllWindows
     ])
     tray.setToolTip('Google Keep')
     tray.setContextMenu(contextMenu)
+    tray.on('double-click', (event, bounds) => {
+      app.emit('activate')
+    })
   })
 }

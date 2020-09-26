@@ -4,10 +4,10 @@ const BrowserWindow = require('electron').BrowserWindow
 const config = require('./config')
 
 module.exports = {
-  createMainWindow: function (handleResize, handleClosed) {
-    return module.exports.createMainWindowWithUrl(handleResize, handleClosed, 'https://keep.google.com')
+  createMainWindow: function (handleResize, handleClose, handleClosed) {
+    return module.exports.createMainWindowWithUrl(handleResize, handleClose, handleClosed, 'https://keep.google.com')
   },
-  createMainWindowWithUrl: function (handleResize, handleClosed, url) {
+  createMainWindowWithUrl: function (handleResize, handleClose, handleClosed, url) {
     const lastWindowState = config.get('lastWindowState')
 
     const window = new BrowserWindow({
@@ -27,6 +27,7 @@ module.exports = {
     window.loadURL(url, {userAgent: 'Chrome'})
     window.on('resize', handleResize)
     window.on('closed', handleClosed)
+    window.on('close', handleClose)
 
     return window
   }
