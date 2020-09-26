@@ -46,7 +46,6 @@ function handleClick (event) {
 
   if (node.closest('a').href.indexOf('?authuser=') > -1) {
     // Link is to other account window.
-    console.log("Opening new account window.")
     event.preventDefault()
     ipc.send('newaccountwindow', node.closest('a').href)
   }
