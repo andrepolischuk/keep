@@ -1,13 +1,14 @@
 'use strict'
 const join = require('path').join
 const BrowserWindow = require('electron').BrowserWindow
+var { application } = require('electron');
 const config = require('./config')
 
 module.exports = function createMainWindow (handleResize, handleClosed) {
   const lastWindowState = config.get('lastWindowState')
 
   const window = new BrowserWindow({
-    minWidth: 615,
+    minWidth: 900,
     x: lastWindowState.x,
     y: lastWindowState.y,
     width: lastWindowState.width,
@@ -23,6 +24,13 @@ module.exports = function createMainWindow (handleResize, handleClosed) {
   window.loadURL('https://keep.google.com', {userAgent: 'Chrome'})
   window.on('resize', handleResize)
   window.on('closed', handleClosed)
+
+  window.on('close', function (event) {
+        event.preventDefault();
+        window.hide();
+
+    return false;
+  });
 
   return window
 }
