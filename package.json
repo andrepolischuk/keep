@@ -43,7 +43,7 @@
     "electron-debug": "^1.0.1"
   },
   "devDependencies": {
-    "electron": "^9.2.0",
+    "electron": "^9.4.0",
     "electron-builder": "^20.44.4",
     "lint-staged": "^7.3.0",
     "prettier": "^1.19.1",
